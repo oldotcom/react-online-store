@@ -17,12 +17,12 @@ const product = {
 };
 
 function App() {
-  const pageSize = 9;
+  // const pageSize = 9;
 
   return (
     <div className="App">
      <Card product={product} />
-     <Pagination />
+     <Pagination totalPages={12} />
     </div>
   );
 }

@@ -16,13 +16,14 @@ const product = {
   "brand": "acer"
 };
 
-function App() {
+const App = () => {
   // const pageSize = 9;
+  const totalPages = 12;
 
   return (
     <div className="App">
      <Card product={product} />
-     <Pagination totalPages={12} />
+     <Pagination totalPages={totalPages} activePageIndex={0} />
     </div>
   );
 }

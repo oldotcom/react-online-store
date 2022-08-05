@@ -1,5 +1,7 @@
 // import { Component } from "react";
 
+import { useState } from "react";
+
 // export default class Pagination extends Component {
 //     constructor(props) {
 //         super(props);
@@ -16,15 +18,23 @@
 //     }
 // }
 
-const PaginationItem = ({ pageIndex }) => {
+const PaginationItem = ({ onClick, pageIndex, isActive }) => {
+    const activeClass = isActive ? 'active' : '';
+
     return (
-        <li className="pagination__list-item">
+        <li onClick={onClick} className={`pagination__list-item ${activeClass}`}>
             { pageIndex + 1 }
         </li>
     );
-};
+}; 
 
-const Pagination = ({ totalPages = 0 }) => {
+const Pagination = ({ totalPages = 0, activePageIndex = 0 }) => {
+    const [pageIndex, setPageIndex] = useState(activePageIndex);
+
+    const changePage = (newPageIndex) => {
+        setPageIndex(newPageIndex);
+    };
+    
     return (
         <div className="pagination">
             <div className="pagination__arrow" data-element="arrow-left"></div>
@@ -32,7 +42,11 @@ const Pagination = ({ totalPages = 0 }) => {
             <ul className="pagination__list" data-element="pagination">
                 {
                     new Array(totalPages).fill('').map((_, index) => {
-                        return <PaginationItem pageIndex={index} />
+                        return <PaginationItem
+                            onClick={() => changePage(index)} 
+                            pageIndex={index} 
+                            isActive={pageIndex === index} 
+                        />
                     })
                 }
             </ul>
